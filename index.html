@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>React Playground</title>
+
+<!--         
+    Must have these two script tags for React to insert into an html
+
+    Third tag is for Babel to be able to use JSX for XML to HTML conversion
+ -->
+
+        <script src="https://unpkg.com/react@16.7.0/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@16.7.0/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+        <style>
+            .heading {
+                color: blue;
+            }
+        </style>
+    </head>
+<!-- 
+    Must use correct charachters. babel is not the same as Babel. Case sensitive is a thing when plugging in the babel.  -->
+
+
+    <body>
+        <div id="root"></div>
+        <script type="text/babel">
+            
+            //let city = "Madrid";
+
+            // React component must begin with Capital Letter
+            const Hello = (props) => {
+                console.log(props)
+                return(
+                    <div className="heading">
+                        <h1>Welcome to {props.library}</h1>
+                        <p>{props.message}</p>
+                    </div>
+                )
+                    // If you encase in curly braces you must use a return 
+            }; 
+
+            // Creating a component with nested components.
+//  ******************************************************************************************************************
+//              Learning React.js LinkedIn Learning sections One through 4
+//  ******************************************************************************************************************
+
+            /*
+            const Lake = ({name}) => <h1>{name}</h1>;
+
+                class App extends React.Component {
+                    
+                    state = {
+                        loggedIn: true
+                    }
+                    logIn = () => this.setState({loggedIn: true})
+                    logOut = () => this.setState({loggedIn: false})
+                    render() {
+                        return (
+
+                            <div>
+                                <button onClick={this.logIn}>Log In</button>
+                                <button onClick={this.logOut}>Log Out</button>
+                                <div>The user is {this.state.loggedIn ? "logged in" : "not logged in"}</div>
+                                <Lake name="Lake Ozark" />
+                                <Lake name="Lake Tahoe" />
+                                <Lake name="Lake Michigan" />
+                             <Lake name="Lake Eerie" />
+                            </div>
+                        )                       
+                    }
+                }                
+
+            */    
+            // When adding a class via React and JSX it is not as simple as using the class attribute. Must use "className" instead. 
+            // Makes things a little different than the regular HTML
+
+            const lakeList = [
+               {id: 1, name: "Echo Lake", trailhead: "Echo Lake"}, 
+               {id: 2, name: "Maud Lake", trailhead: "Wright's Lake"}, 
+               {id: 3, name: "Cascade Lake", trailhead: "Bayview Lake"}, 
+               {id: 4, name: "Lake Meade", trailhead: "Kazadum"}
+            ];
+
+            const App = ({lakes}) => (
+                <ul>
+                    {lakes.map(lake => //When using a list, must give a key value to each item in the list so that React can know what was what. I can display without the key, but will give a warning to the console. 
+                        <li key={lake.id}>{lake.name} | Trailhead: {lake.trailhead}</li>
+            )}        
+                </ul>
+            )
+
+
+            ReactDOM.render(
+                <App lakes={lakeList}/>,
+                document.getElementById("root")
+        );
+        
+        </script>
+    </body>
+</html>
